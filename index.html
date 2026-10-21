@@ -155,14 +155,20 @@
 
   /* hero visual */
   .hero-visual{position:relative;display:flex;justify-content:center}
+  .visual-stack{position:relative;width:min(340px,80vw)}
   .plate{
-    width:min(340px,80vw);aspect-ratio:1;border-radius:50%;
+    width:100%;aspect-ratio:1;border-radius:50%;
     background:radial-gradient(circle at 32% 28%,#fff 0 6%, #FFF2E2 60%, #FFE3C2 100%);
     box-shadow:var(--shadow),inset 0 -14px 30px rgba(255,122,0,.12);
     display:flex;align-items:center;justify-content:center;
     position:relative;
   }
-  .plate .wing{font-size:clamp(110px,16vw,150px);filter:drop-shadow(0 16px 22px rgba(255,122,0,.35));animation:bob 5s ease-in-out infinite}
+  .wing-ic{
+    width:clamp(104px,15vw,150px);height:clamp(104px,15vw,150px);
+    filter:drop-shadow(0 16px 22px rgba(255,122,0,.35));
+    animation:bob 5s ease-in-out infinite;
+  }
+  .chip-ic{width:22px;height:22px;flex:none}
   @keyframes bob{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-12px) rotate(4deg)}}
   .chip{
     position:absolute;background:#fff;border-radius:16px;
@@ -211,7 +217,7 @@
   }
   .card .qty small{font-size:.9rem;color:var(--ink-soft);font-weight:700;margin-left:4px}
   .card .emoji{
-    position:absolute;top:18px;right:20px;font-size:2rem;
+    position:absolute;top:16px;right:18px;width:42px;height:42px;
     filter:drop-shadow(0 6px 10px rgba(255,122,0,.25));
   }
   .card h3{font-size:1.02rem;font-weight:800;margin-bottom:6px;line-height:1.3}
@@ -284,9 +290,7 @@
   .feat h3{font-weight:800;margin-bottom:6px;font-size:1.02rem}
   .feat p{font-size:.86rem;color:var(--ink-soft)}
 
-  .contact-cta{
-    text-align:center;
-  }
+  .contact-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;text-align:center}
 
   /* footer */
   footer{
@@ -306,18 +310,82 @@
     .steps{grid-template-columns:1fr}
     .hero-in{grid-template-columns:1fr;gap:38px}
     .hero-visual{order:-1}
-    .nav{display:none}
   }
   @media (max-width:560px){
-    .cards,.feat-grid{grid-template-columns:1fr}
-    .combo-banner{padding:30px 26px}
-    .logo small{display:none}
+    .wrap{padding:0 16px}
+    .header-in{flex-wrap:wrap;padding:10px 0;gap:6px 14px}
+    .logo{font-size:1.2rem}
+    .nav{order:3;width:100%;justify-content:center;gap:16px;margin-left:0;font-size:.85rem}
     .lang-switch button{padding:7px 11px;font-size:.72rem}
-    .chip-1,.chip-2,.chip-3,.chip-4{display:none}
+
+    .hero{padding:44px 0 60px}
+    .visual-stack{width:min(250px,68vw);display:flex;flex-wrap:wrap;justify-content:center;gap:8px;row-gap:10px}
+    .plate{order:-1}
+    .wing-ic{width:96px;height:96px}
+    .price-badge{width:96px;height:96px;bottom:-4px;right:-4px}
+    .price-badge .num{font-size:1.25rem}
+    .price-badge small{font-size:.58rem}
+    .chip{position:static;animation:none;padding:9px 12px;font-size:.78rem;border-radius:12px}
+    .chip-ic{width:18px;height:18px}
+    .cta-row{justify-content:center}
+
+    /* горизонтальные карусели с прокруткой */
+    .cards,.feat-grid{
+      display:flex;flex-wrap:nowrap;overflow-x:auto;
+      scroll-snap-type:x mandatory;
+      gap:12px;padding:4px 2px 14px;
+      scrollbar-width:none;
+    }
+    .cards::-webkit-scrollbar,.feat-grid::-webkit-scrollbar{display:none}
+    .card,.feat{flex:0 0 76%;scroll-snap-align:center}
+
+    .combo-banner{padding:30px 26px}
+
+    /* кнопки Telegram / WhatsApp — в один ряд */
+    .contact-cta{gap:10px}
+    .contact-cta .btn{flex:1 1 0;min-width:0;padding:14px 8px;flex-direction:column;gap:6px}
+    .contact-cta .split{align-items:center;text-align:center}
+    .contact-cta .split span{font-size:.8rem}
+    .contact-cta .split small{display:none}
   }
 </style>
 </head>
 <body id="top">
+
+<!-- Плоские векторные иконки (одинаково выглядят на всех устройствах) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="ic-wing" viewBox="0 0 64 64">
+    <path d="M26.5 35 L32 47.5 L37.5 35 Z" fill="#D97B29"/>
+    <rect x="29.8" y="43" width="4.4" height="12" rx="2.2" fill="#F6EFDC"/>
+    <circle cx="28.4" cy="55.5" r="4.3" fill="#F6EFDC"/>
+    <circle cx="35.6" cy="55.5" r="4.3" fill="#F6EFDC"/>
+    <ellipse cx="32" cy="20.5" rx="21.5" ry="17.5" fill="#E8944A"/>
+    <ellipse cx="24.5" cy="14" rx="8" ry="5" fill="#F7B733" opacity=".9"/>
+    <circle cx="41" cy="23" r="2" fill="#C96F2E" opacity=".75"/>
+    <circle cx="34.5" cy="27.5" r="1.6" fill="#C96F2E" opacity=".75"/>
+    <circle cx="44.5" cy="16.5" r="1.4" fill="#C96F2E" opacity=".55"/>
+  </symbol>
+  <symbol id="ic-fries" viewBox="0 0 64 64">
+    <rect x="19" y="10" width="6.5" height="24" rx="3" fill="#F7C948" transform="rotate(-9 22 22)"/>
+    <rect x="28.5" y="6" width="6.5" height="28" rx="3" fill="#FFD766"/>
+    <rect x="38" y="10" width="6.5" height="24" rx="3" fill="#F7C948" transform="rotate(9 41 22)"/>
+    <path d="M13 28 h38 l-3.6 27 a4.5 4.5 0 0 1-4.5 4 H21.1 a4.5 4.5 0 0 1-4.5-4 Z" fill="#E8590C"/>
+    <path d="M13.8 28 h36.4 l-.9 7 H14.7 Z" fill="#C24708"/>
+  </symbol>
+  <symbol id="ic-sauce" viewBox="0 0 64 64">
+    <path d="M15 22 h34 l-3.2 29 a5 5 0 0 1-5 4.5 H23.2 a5 5 0 0 1-5-4.5 Z" fill="#F2A93B"/>
+    <ellipse cx="32" cy="22" rx="17" ry="5" fill="#FFDCA6"/>
+    <ellipse cx="32" cy="21.4" rx="13" ry="3.2" fill="#D9452C"/>
+    <circle cx="32" cy="44" r="6" fill="#FFDCA6" opacity=".55"/>
+  </symbol>
+  <symbol id="ic-cola" viewBox="0 0 64 64">
+    <rect x="27" y="3" width="4.5" height="17" rx="2.2" fill="#E8590C" transform="rotate(14 29 11)"/>
+    <path d="M15.5 19 h33 l-2.8 35 a5 5 0 0 1-5 4.5 H23.3 a5 5 0 0 1-5-4.5 Z" fill="#D9452C"/>
+    <path d="M15.5 19 h33 l-.9 11 H16.4 Z" fill="#B93220"/>
+    <ellipse cx="32" cy="19" rx="16.5" ry="4.4" fill="#F6EFDC"/>
+    <path d="M26 37 q6 -4.5 12 0 l-1.3 9 q-4.7 -3 -9.4 0 Z" fill="#fff" opacity=".9"/>
+  </symbol>
+</svg>
 
 <!-- ================= HEADER ================= -->
 <header class="site-header">
@@ -358,16 +426,18 @@
     </div>
 
     <div class="hero-visual">
-      <div class="plate">
-        <span class="wing">🍗</span>
-        <span class="chip chip-4">🍗 <span data-i18n="chip.wings">25 куриных крыльев</span></span>
-        <span class="chip chip-1">🍟 <span data-i18n="chip.potato">1 кг картошки</span></span>
-        <span class="chip chip-2">🥫 <span data-i18n="chip.sauces">3 соуса по 200 г</span></span>
-        <span class="chip chip-3">🥤 <span data-i18n="chip.cola">1 л колы</span></span>
-        <div class="price-badge">
-          <span class="num">1400</span>
-          <small data-i18n="badge.som">сом · всё включено</small>
+      <div class="visual-stack">
+        <div class="plate">
+          <svg class="wing-ic" aria-hidden="true"><use href="#ic-wing"/></svg>
+          <div class="price-badge">
+            <span class="num">1400</span>
+            <small data-i18n="badge.som">сом · всё включено</small>
+          </div>
         </div>
+        <span class="chip chip-4"><svg class="chip-ic" aria-hidden="true"><use href="#ic-wing"/></svg><span data-i18n="chip.wings">25 куриных крыльев</span></span>
+        <span class="chip chip-1"><svg class="chip-ic" aria-hidden="true"><use href="#ic-fries"/></svg><span data-i18n="chip.potato">1 кг картошки</span></span>
+        <span class="chip chip-2"><svg class="chip-ic" aria-hidden="true"><use href="#ic-sauce"/></svg><span data-i18n="chip.sauces">3 соуса по 200 г</span></span>
+        <span class="chip chip-3"><svg class="chip-ic" aria-hidden="true"><use href="#ic-cola"/></svg><span data-i18n="chip.cola">1 л колы</span></span>
       </div>
     </div>
   </div>
@@ -384,28 +454,28 @@
 
     <div class="cards">
       <article class="card reveal">
-        <span class="emoji">🍗</span>
+        <svg class="emoji" aria-hidden="true"><use href="#ic-wing"/></svg>
         <span class="qty">25<small data-i18n="u.pcs">шт</small></span>
         <h3 data-i18n="c1.t">Хрустящие куриные крылья</h3>
         <p data-i18n="c1.d">Румяная корочка снаружи, сочное мясо внутри</p>
       </article>
 
       <article class="card reveal">
-        <span class="emoji">🍟</span>
+        <svg class="emoji" aria-hidden="true"><use href="#ic-fries"/></svg>
         <span class="qty">1<small data-i18n="u.kg">кг</small></span>
         <h3 data-i18n="c2.t">Картошка по-деревенски</h3>
         <p data-i18n="c2.d">Крупные дольки в аппетитной приправе</p>
       </article>
 
       <article class="card reveal">
-        <span class="emoji">🥫</span>
+        <svg class="emoji" aria-hidden="true"><use href="#ic-sauce"/></svg>
         <span class="qty">3<small data-i18n="u.x200">× 200 г</small></span>
         <h3 data-i18n="c3.t">Фирменные соусы</h3>
         <p data-i18n="c3.d">По 200 г каждый — хватит на все крылышки</p>
       </article>
 
       <article class="card reveal">
-        <span class="emoji">🥤</span>
+        <svg class="emoji" aria-hidden="true"><use href="#ic-cola"/></svg>
         <span class="qty">1<small data-i18n="u.l">л</small></span>
         <h3 data-i18n="c4.t">Кола</h3>
         <p data-i18n="c4.d">Холодная и свежая — как раз к столу</p>
@@ -491,7 +561,7 @@
       <p class="sec-sub" data-i18n="contact.sub">Позвоните или напишите — подскажем все детали</p>
     </div>
 
-    <div class="contact-cta reveal" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+    <div class="contact-cta reveal">
       <a class="btn btn-tg" href="https://t.me/kokorozakazy_bot" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
         <span class="split"><span data-i18n="cta.tg">Заказать в Telegram</span><small>@kokorozakazy_bot</small></span>
