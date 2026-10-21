@@ -329,15 +329,15 @@
     .chip-ic{width:18px;height:18px}
     .cta-row{justify-content:center}
 
-    /* горизонтальные карусели с прокруткой */
-    .cards,.feat-grid{
-      display:flex;flex-wrap:nowrap;overflow-x:auto;
-      scroll-snap-type:x mandatory;
-      gap:12px;padding:4px 2px 14px;
-      scrollbar-width:none;
-    }
-    .cards::-webkit-scrollbar,.feat-grid::-webkit-scrollbar{display:none}
-    .card,.feat{flex:0 0 76%;scroll-snap-align:center}
+    /* статичная сетка: все карточки видны сразу, без прокрутки */
+    .cards,.feat-grid{grid-template-columns:repeat(2,1fr);gap:12px}
+    .card,.feat{padding:20px 14px}
+    .card h3{font-size:.9rem}
+    .card p{font-size:.78rem}
+    .feat h3{font-size:.9rem}
+    .feat p{font-size:.78rem}
+    .card .emoji{width:34px;height:34px;top:12px;right:12px}
+    .feat:nth-child(3){grid-column:1/-1}
 
     .combo-banner{padding:30px 26px}
 
@@ -355,11 +355,11 @@
 <!-- Плоские векторные иконки (одинаково выглядят на всех устройствах) -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="ic-wing" viewBox="0 0 64 64">
-    <path d="M26.5 35 L32 47.5 L37.5 35 Z" fill="#D97B29"/>
-    <rect x="29.8" y="43" width="4.4" height="12" rx="2.2" fill="#F6EFDC"/>
-    <circle cx="28.4" cy="55.5" r="4.3" fill="#F6EFDC"/>
-    <circle cx="35.6" cy="55.5" r="4.3" fill="#F6EFDC"/>
-    <ellipse cx="32" cy="20.5" rx="21.5" ry="17.5" fill="#E8944A"/>
+    <path d="M26.5 35 L32 47.5 L37.5 35 Z" fill="#D97B29" stroke="#1F130A" stroke-width="2.5" stroke-linejoin="round"/>
+    <rect x="29.8" y="43" width="4.4" height="12" rx="2.2" fill="#F6EFDC" stroke="#1F130A" stroke-width="2"/>
+    <circle cx="28.4" cy="55.5" r="4.3" fill="#F6EFDC" stroke="#1F130A" stroke-width="2"/>
+    <circle cx="35.6" cy="55.5" r="4.3" fill="#F6EFDC" stroke="#1F130A" stroke-width="2"/>
+    <ellipse cx="32" cy="20.5" rx="21.5" ry="17.5" fill="#E8944A" stroke="#1F130A" stroke-width="3"/>
     <ellipse cx="24.5" cy="14" rx="8" ry="5" fill="#F7B733" opacity=".9"/>
     <circle cx="41" cy="23" r="2" fill="#C96F2E" opacity=".75"/>
     <circle cx="34.5" cy="27.5" r="1.6" fill="#C96F2E" opacity=".75"/>
